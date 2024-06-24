@@ -1,0 +1,32 @@
+{% extends 'patient/pat_base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="row">
+<div class="col-lg-6">
+    <div class="card">
+                  <div class="card-body">
+                    <div class="row alig n-items-start">
+                      <div class="col-8">
+                        <h1>APPOINTMENTS</h1>
+                          <a href="/appointments">Create</a>
+                      </div>
+                    </div>
+                  </div>
+    </div>
+</div>
+<div class="col-lg-6">
+    <div class="card">
+                  <div class="card-body">
+                    <div class="row alig n-items-start">
+                        <h1>BILLS</h1>
+                        <a href="/billing">Show</a>
+                      </div>
+                    </div>
+                  </div>
+    </div>
+</div>
+
+{% endblock %}

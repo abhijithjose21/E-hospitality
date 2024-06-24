@@ -1,0 +1,51 @@
+{% extends "admin/base.html" %}
+{% block content %}
+<style>
+    .table {
+        margin-top: 20px;
+    }
+
+    .thead-dark th {
+        background-color: #343a40;
+        color: white;
+    }
+
+    .badge {
+        font-size: 90%;
+    }
+</style>
+
+<h2 class="mb-4">Bills</h2>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Patient Name</th>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Payment Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bill in bills %}
+            <tr>
+                <td>{{ bill.patient.user_name }}</td>
+                <td>{{ bill.amount }}</td>
+                <td>{{ bill.description }}</td>
+                <td>{{ bill.date_issued }}</td>
+                <td>
+                    {% if bill.is_paid %}
+                        <span class="">Paid</span>
+                    {% else %}
+                        <span class="">Pending</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

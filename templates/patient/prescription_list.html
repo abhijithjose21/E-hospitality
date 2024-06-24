@@ -1,0 +1,14 @@
+{% extends "patient/pat_base.html" %}
+{% block content %}
+  <h2>Prescriptions</h2>
+  <ul>
+    {% for prescription in prescription %}
+      <p><strong>Doctor:</strong> {{ prescription.doctor.name }}</p>
+      <p><strong>Medicine:</strong> {{ prescription.medication.name }}</p>
+      <p><strong>Dosage:</strong> {{ prescription.dosage }}</p>
+      <p><strong>Frequency:</strong> {{ prescription.frequency }}</p>
+      <p><strong>Date:</strong> {{ prescription.date_prescribed }}</p>
+    {% endfor %}
+  </ul>
+
+{% endblock %}

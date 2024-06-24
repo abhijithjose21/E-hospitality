@@ -1,0 +1,54 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<style>
+    .appointment-detail-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .appointment-detail-container h2 {
+        margin-bottom: 20px;
+    }
+
+    .appointment-detail-container p {
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+
+    .appointment-detail-container p strong {
+        display: inline-block;
+        width: 100px;
+    }
+
+    .back-link {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+
+    .back-link:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="appointment-detail-container">
+    <h2>Appointment Detail</h2>
+    <p><strong>Patient:</strong> {{ appointment.patient.first_name }} {{ appointment.patient.last_name }}</p>
+    <p><strong>Doctor:</strong> {{ appointment.doctor.name }}</p>
+    <p><strong>Date:</strong> {{ appointment.appointment_date }}</p>
+    <p><strong>Reason:</strong> {{ appointment.reason }}</p>
+
+    <a href="{% url 'admin_appointmentlist' %}" class="back-link">Back to list</a>
+</div>
+
+{% endblock %}

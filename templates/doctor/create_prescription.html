@@ -1,0 +1,83 @@
+{% extends "doctor/base.html" %}
+{% block content %}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+
+        margin: 0;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    form {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    select,
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<h1>Create Prescription</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="patient">Patient:</label>
+    <select name="patient" id="patient">
+        {% for patient in patients %}
+            <option value="{{ patient.id }}">{{ patient.first_name }}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <label for="medication">Medication:</label>
+    <select name="medication" id="medication">
+        {% for medication in medications %}
+            <option value="{{ medication.id }}">{{ medication.name }}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <label for="dosage">Dosage:</label>
+    <input type="text" name="dosage" id="dosage" required>
+    <br>
+    <label for="frequency">Frequency:</label>
+    <input type="text" name="frequency" id="frequency" required>
+    <br>
+    <button type="submit">Prescribe</button>
+</form>
+
+{% endblock %}

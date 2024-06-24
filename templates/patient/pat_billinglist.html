@@ -1,0 +1,73 @@
+{% extends "patient/pat_base.html" %}
+{% block content %}
+<style>
+    .bills-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .bills-container h2 {
+        margin-bottom: 20px;
+    }
+
+    .bill-item {
+        padding: 15px;
+        margin-bottom: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .bill-item p {
+        margin: 5px 0;
+        font-size: 16px;
+    }
+
+    .bill-item strong {
+        display: inline-block;
+        width: 100px;
+    }
+
+    .pay-button {
+        display: block;
+        margin-top: 10px;
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border: none;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+        cursor: pointer;
+    }
+
+    .pay-button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="bills-container">
+    <h2>Bills</h2>
+    <ul class="list-unstyled">
+        <form action="{% url 'create-checkout-session' %}" method="POST">
+            {% csrf_token %}
+
+            {% for bill in bills %}
+            {% if bill.is_paid == 0 %}
+            <li class="bill-item">
+                <p><strong>Amount:</strong> {{ bill.amount }}</p>
+                <p><strong>Description:</strong> {{ bill.description }}</p>
+                <p><strong>Date:</strong> {{ bill.date_issued }}</p>
+                <button id="checkout-button" type="submit" class="pay-button">Pay</button>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </form>
+    </ul>
+</div>
+
+{% endblock %}

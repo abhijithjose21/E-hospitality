@@ -1,0 +1,81 @@
+<!-- create_billing.html -->
+{% extends "admin/base.html" %}
+{% block content %}
+
+<style>
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container h1 {
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .form-group button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .form-group button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="form-container">
+    <h1>Create Billing</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="patient">Patient:</label>
+            <select name="patient" id="patient" class="form-control">
+                {% for patient in patients %}
+                    <option value="{{ patient.id }}">{{ patient.first_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="amount">Amount:</label>
+            <input type="text" name="amount" id="amount" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <input type="text" name="description" id="description" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="date_issued">Date:</label>
+            <input type="date" name="date_issued" id="date_issued" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

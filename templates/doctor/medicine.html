@@ -1,0 +1,39 @@
+{% extends "doctor/base.html" %}
+
+{% block content %}
+
+
+<div class="row">
+<div class="container col-lg-6">
+  <table class="table table-bordered">
+    <thead>
+      <th>Name</th>
+      <th>Description</th>
+    </thead>
+    <tbody>
+    {% for medicine in medicine %}
+      <tr>
+      <td>{{ medicine.name }}</td>
+      <td>{{ medicine.description }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+<div class="container col-lg-6">
+  <form method="POST">
+    {% csrf_token %}
+      <label class="form-label m-2">Medicine Name</label>
+      <input class="form-control m-2" type="text" name="name" required>
+      <label class="form-label m-2">Description</label>
+      <input class="form-control m-2" type="text" name="description" required>
+
+      <button class="btn btn-primary m-2" type="submit">Add</button>
+
+
+  </form>
+</div>
+
+</div>
+{% endblock %}

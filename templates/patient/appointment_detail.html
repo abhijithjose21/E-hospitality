@@ -1,0 +1,74 @@
+{% extends "patient/pat_base.html" %}
+
+{% block content %}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+    strong {
+        color: #333;
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    form {
+        display: inline;
+    }
+
+   #but, #a {
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    #:hover, #a:hover {
+        background-color: #0056b3;
+    }
+
+    a {
+        display: inline-block;
+    }
+</style>
+
+<h2>Appointment Detail</h2>
+<p><strong>Doctor:</strong> {{ appointment.doctor.name }}</p>
+<p><strong>Date:</strong> {{ appointment.appointment_date }}</p>
+<p><strong>Reason:</strong> {{ appointment.reason }}</p>
+
+<div class="action-buttons">
+    <form method="post" action="{% url 'appointment_delete' appointment.id %}">
+        {% csrf_token %}
+        <button id="but" type="submit">Delete</button>
+    </form>
+    <a id="a" href="{% url 'appointment_list' %}">Back to list</a>
+</div>
+
+{% endblock %}

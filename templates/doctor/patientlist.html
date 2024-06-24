@@ -1,0 +1,57 @@
+{% extends "doctor/base.html" %}
+{% block content %}
+
+<style>
+    .appointments-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .appointments-container h2 {
+        margin-bottom: 20px;
+    }
+
+    .appointments-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .appointments-list li {
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    .appointments-list li a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+    }
+
+    .appointments-list li:hover {
+        background-color: #f0f8ff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .appointments-list li a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="appointments-container">
+  <h2>Patient</h2>
+  <ul class="appointments-list">
+    {% for patients in patients %}
+
+      <li><a href="doc_patientdetail/{{ patients.id }}">{{ patients.first_name }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

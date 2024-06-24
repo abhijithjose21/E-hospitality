@@ -1,0 +1,82 @@
+{% extends "patient/pat_base.html" %}
+
+{% block content %}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+
+    form {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    select,
+    input[type="datetime-local"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    p {
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<h2>{% if appointment %}Update{% else %}Book{% endif %} Appointment</h2>
+<form method="post">
+    {% csrf_token %}
+    {% if not appointment %}
+      <label for="doctor">Doctor:</label>
+      <select name="doctor" id="doctor">
+        {% for doctor in doctors %}
+          <option value="{{ doctor.id }}">{{ doctor.name }} - {{ doctor.department }}</option>
+        {% endfor %}
+      </select><br>
+    {% endif %}
+    <p><strong>Patient:</strong> {{ patient.first_name }}</p>
+    <label for="appointment_date">Appointment Date:</label>
+    <input type="datetime-local" id="appointment_date" name="appointment_date" value="{{ appointment.appointment_date|date:'Y-m-d\\TH:i' }}"><br>
+    <label for="reason">Reason:</label>
+    <textarea id="reason" name="reason">{{ appointment.reason }}</textarea><br>
+    <button type="submit">Save</button>
+</form>
+
+{% endblock %}
